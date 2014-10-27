@@ -3,12 +3,19 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package tr.edu.marun.rmi;
+package tr.edu.marun.rmi.server.model;
 
-import java.rmi.Remote;
 import java.rmi.RemoteException;
 
-public interface Hello extends Remote {
+/**
+ *
+ * @author bamasyali
+ */
+public class HelloImpl implements Hello {
 
-    String sayHello() throws RemoteException;
+    @Override
+    public String sayHello() throws RemoteException {
+        return "Hello, world!";
+    }
+
 }

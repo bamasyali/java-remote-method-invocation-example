@@ -3,10 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package tr.edu.marun.rmi;
+package tr.edu.marun.rmi.client;
 
+import java.rmi.NotBoundException;
+import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
+import tr.edu.marun.rmi.server.model.Hello;
+import tr.edu.marun.rmi.server.util.Constants;
 
 /**
  *
@@ -19,15 +23,13 @@ public class Client {
 
     public static void main(String[] args) {
 
-        String host = (args.length < 1) ? null : args[0];
         try {
-            Registry registry = LocateRegistry.getRegistry(2001);
-            Hello stub = (Hello) registry.lookup("Hello");
+            Registry registry = LocateRegistry.getRegistry(Constants.PORT);
+            Hello stub = (Hello) registry.lookup(Constants.NAME);
             String response = stub.sayHello();
             System.out.println("response: " + response);
-        } catch (Exception e) {
+        } catch (RemoteException | NotBoundException e) {
             System.err.println("Client exception: " + e.toString());
-            e.printStackTrace();
         }
     }
 }
